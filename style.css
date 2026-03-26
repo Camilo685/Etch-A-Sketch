@@ -2,10 +2,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-content: center;
     width: 90vh;
     height: 90vh;
-    gap: 1px;
-    padding: 1px;
 }
 
 body {
