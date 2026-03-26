@@ -1,5 +1,6 @@
 let container = document.querySelector(".container");
 let reset = document.querySelector(".reset");
+let opacityCounter = 0;
 
 function squareCreation(sze = 16){
     for (let i = 0; i < sze * sze; i++){
@@ -11,7 +12,10 @@ function squareCreation(sze = 16){
 
         let backgroundChange = function(e) {
             let getRandomInt = (max) => Math.floor(Math.random() * max);
+            opacityCounter = (opacityCounter < 1) ? opacityCounter + 0.1 : 1;
             e.target.style.backgroundColor = `rgb(${getRandomInt(256)}, ${getRandomInt(256)}, ${getRandomInt(256)})`;
+            e.target.style.opacity = `${opacityCounter}`;
+            console.log(opacityCounter);
             e.target.removeEventListener("mouseover", backgroundChange);
         };
 
@@ -22,9 +26,12 @@ function squareCreation(sze = 16){
 
 reset.addEventListener("click", () => {
     let newSize = prompt("Enter new side size (Max = 100): ");
-    newSize = (+newSize <= 100) ? +newSize : 100;
-    container.textContent = "";
-    squareCreation(newSize);
+    if(newSize && !isNaN(+newSize) && +newSize > 0){
+        newSize = (+newSize <= 100) ? +newSize : 100;
+        container.textContent = "";
+        opacityCounter = 0;
+        squareCreation(newSize);
+    }
 });
 
 squareCreation();
